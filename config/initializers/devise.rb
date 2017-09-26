@@ -1,3 +1,19 @@
+module Devise
+  mattr_accessor :phone_confirmation_keys
+  @@phone_confirmation_keys = [:phone]
+
+  mattr_accessor :phone_reconfirmable
+  @@phone_reconfirmable = true
+
+  mattr_accessor :confirm_phone_within
+  @@confirm_phone_within = nil
+end
+
+Devise.add_module(:phone_confirmable, strategy: false,
+                                      controller: :confirmations,
+                                      model: 'devise/models/phone_confirmable',
+                                      route: :confirmation)
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
